@@ -1,5 +1,4 @@
-# Insight API
-
+# Insight API [![Build Status](https://travis-ci.org/CoinSpace/insight-lite-api.svg)](https://travis-ci.org/CoinSpace/insight-lite-api)
 A Litecoin blockchain REST and web socket API service for [Litecore Node](https://github.com/litecoin-project/litecore-node).
 
 This is a backend-only service. If you're looking for the web frontend application, take a look at https://github.com/litecoin-project/insight-lite-ui.

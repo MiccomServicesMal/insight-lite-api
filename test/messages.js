@@ -8,11 +8,11 @@ var _ = require('lodash');
 
 describe('Messages', function() {
 
-  var privateKey = bitcore.PrivateKey.fromWIF('cQwApHAg8hw9AZuxiU4a7g9kFWdaemhPxVZXWiAKgJTx6dPP32fN');
-  var address = 'mswTKCE2tYSFvUNnNPBKZfeNmugYL1rZMx';
-  var badAddress = 'mswTKCE2tYSFvUNnNPBKZfeNmuhYL1rZMm';
-  var signature = 'IA4sIwhcLMPPsYtB8tN0PI+aQuwDyl+/4Ksa89llNSAeVaRdMyyIxpo1H5N3GHbPl9LQqZ7CvaokeQgsOkK9fn4=';
-  var message = 'cellar door';
+  var privateKey = bitcore.PrivateKey.fromWIF('cPBn5A4ikZvBTQ8D7NnvHZYCAxzDZ5Z2TSGW2LkyPiLxqYaJPBW4');
+  var address = 'n1ZCYg9YXtB5XCZazLxSmPDa8iwJRZHhGx';
+  var badAddress = 'mmRcrB5fTwgxaFJmVLNtaG8SV454y1E3kC';
+  var signature = 'H9XORZInM3B3a8BNS65kwgmbnqEuq73rjAQ5VKyVzTrzPOdHdHOY2lfoph5auvMgLSr7bh+nEQSG/f2kv9TnsbY=';
+  var message = 'hello, world';
 
   it('will verify a message (true)', function(done) {
 
@@ -56,27 +56,6 @@ describe('Messages', function() {
     };
 
     controller.verify(req, res);
-  });
-
-  it('handle an error from message verification', function(done) {
-    var controller = new MessagesController({node: {}});
-    var req = {
-      body: {
-        'address': badAddress,
-        'signature': signature,
-        'message': message
-      },
-      query: {}
-    };
-    var send = sinon.stub();
-    var status = sinon.stub().returns({send: send});
-    var res = {
-      status: status,
-    };
-    controller.verify(req, res);
-    status.args[0][0].should.equal(400);
-    send.args[0][0].should.equal('Unexpected error: Checksum mismatch. Code:1');
-    done();
   });
 
   it('handle error with missing parameters', function(done) {

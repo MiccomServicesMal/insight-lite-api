@@ -64,7 +64,7 @@ describe('Blocks', function() {
       'chainwork': '0000000000000000000000000000000000000000000000054626b1839ade284a',
       'previousblockhash': '00000000000001a55f3214e9172eb34b20e0bc5bd6b8007f3f149fca2c8991a4',
       'nextblockhash': '000000000001e866a8057cde0c650796cb8a59e0e6038dc31c69d7ca6649627d',
-      'reward': 12.5,
+      'reward': 50,
       'isMainChain': true,
       'poolInfo': {}
     };
@@ -87,18 +87,16 @@ describe('Blocks', function() {
       var controller = new BlockController({node: node});
       var hash = '0000000000000afa0c3c0afd450c793a1e300ec84cbe9555166e06132f19a8f7';
       var req = {
-        params: {
-          blockHash: hash
+        blockHashes: [hash]
+      };
+      var res = {
+        jsonp: function(block) {
+          should.exist(block);
+          should(block).eql(insight);
+          done();
         }
       };
-      var res = {};
-      var next = function() {
-        should.exist(req.block);
-        var block = req.block;
-        should(block).eql(insight);
-        done();
-      };
-      controller.block(req, res, next);
+      controller.block(req, res);
     });
 
     it('block pool info should be correct', function(done) {
@@ -116,22 +114,19 @@ describe('Blocks', function() {
       };
       var controller = new BlockController({node: node});
       var req = {
-        params: {
-          blockHash: hash
-        }
+        blockHashes: [hash]
       };
       var res = {};
-      var next = function() {
-        should.exist(req.block);
-        var block = req.block;
-        req.block.poolInfo.poolName.should.equal('Discus Fish');
-        req.block.poolInfo.url.should.equal('http://f2pool.com/');
-        done();
+      var res = {
+        jsonp: function(block) {
+          should.exist(block);
+          block.poolInfo.poolName.should.equal('Discus Fish');
+          block.poolInfo.url.should.equal('http://f2pool.com/');
+          done();
+        }
       };
-
       var hash = '000000000000000004a118407a4e3556ae2d5e882017e7ce526659d8073f13a4';
-
-      controller.block(req, res, next);
+      controller.block(req, res);
     });
 
   });
@@ -264,11 +259,11 @@ describe('Blocks', function() {
     });
 
     it('should give a block reward of 25 * 1e8 for block between first and second halvenings', function() {
-      blocks.getBlockReward(373011).should.equal(25 * 1e8);
+      blocks.getBlockReward(850000).should.equal(25 * 1e8);
     });
 
     it('should give a block reward of 12.5 * 1e8 for block between second and third halvenings', function() {
-      blocks.getBlockReward(500000).should.equal(12.5 * 1e8);
+      blocks.getBlockReward(1685000).should.equal(12.5 * 1e8);
     });
   });
 });
