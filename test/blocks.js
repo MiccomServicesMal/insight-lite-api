@@ -176,6 +176,36 @@ describe('Blocks', function() {
 
   });
 
+  it('should graceful fail on error', function(done) {
+    var error = {
+      code: -5,
+      message: 'some error'
+    };
+
+    var node = {
+      log: sinon.stub(),
+      getBlock: sinon.stub().callsArgWith(1, error)
+    };
+
+    var controller = new BlockController({node: node});
+
+    var res = {
+      status: sinon.stub().returns({
+        send: sinon.spy()
+      })
+    };
+
+    controller.block({blockHashes: ['hash']}, res, function() {
+      assert(false, 'should not call next middleware on fail');
+    }, '');
+
+    setTimeout(function() {
+      res.status.callCount.should.equal(1);
+      res.status.args[0][0].should.equal(404);
+      done();
+    });
+  });
+
   describe('/blocks route', function() {
 
     var insight = {

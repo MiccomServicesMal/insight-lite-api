@@ -949,7 +949,7 @@ describe('Transactions', function() {
     });
   });
 
-  describe('/rawtx/:txid', function() {
+  describe('/rawtx/:rawtxid', function() {
     it('should give the correct data', function(done) {
       var hex = '01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff2303d6250800feb0aae355fe263600000963676d696e6572343208ae5800000000000000ffffffff01c018824a000000001976a91468bedce8982d25c3b6b03f6238cbad00378b8ead88ac00000000';
 
@@ -959,22 +959,22 @@ describe('Transactions', function() {
 
       var transactions = new TxController(node);
 
+      var rawtxid = '25a988e54b02e0e5df146a0f8fa7b9db56210533a9f04bdfda5f4ceb6f77aadd';
       var res = {};
       var req = {
         params: {
-          txid: txid
+          rawtxid: rawtxid
         }
       };
       var next = function() {
         should(req.rawTransaction.rawtx).eql(hex);
         done();
       };
-      var txid = '25a988e54b02e0e5df146a0f8fa7b9db56210533a9f04bdfda5f4ceb6f77aadd';
       transactions.rawTransaction(req, res, next);
     });
   });
 
-  describe('/rawtxs/:txids', function() {
+  describe('/rawtxs/:rawtxids', function() {
     it('should give the correct data', function(done) {
       var hexes = [
         '01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff2303d6250800feb0aae355fe263600000963676d696e6572343208ae5800000000000000ffffffff01c018824a000000001976a91468bedce8982d25c3b6b03f6238cbad00378b8ead88ac00000000',

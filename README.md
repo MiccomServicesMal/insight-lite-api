@@ -207,6 +207,7 @@ Example response:
 
 ### Multiple Transactions
 ```
+  /insight-api/txs/[:rawid1],[:rawid2],...,[:rawidn]
   /insight-lite-api/rawtxs/[:rawid1],[:rawid2],...,[:rawidn]
 ```
 
