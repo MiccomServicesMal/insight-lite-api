@@ -113,6 +113,7 @@ describe('Blocks', function() {
         }
       };
       var controller = new BlockController({node: node});
+      var hash = '000000000000000004a118407a4e3556ae2d5e882017e7ce526659d8073f13a4';
       var req = {
         blockHashes: [hash]
       };
@@ -120,12 +121,56 @@ describe('Blocks', function() {
       var res = {
         jsonp: function(block) {
           should.exist(block);
+          should.exist(block.poolInfo);
+          should.exist(block.poolInfo.poolName);
+          should.exist(block.poolInfo.url);
+
           block.poolInfo.poolName.should.equal('Discus Fish');
           block.poolInfo.url.should.equal('http://f2pool.com/');
           done();
         }
       };
-      var hash = '000000000000000004a118407a4e3556ae2d5e882017e7ce526659d8073f13a4';
+      controller.block(req, res);
+    });
+
+    it('should return combined result on batch request', function(done) {
+      var stub = sinon.stub();
+      stub.onFirstCall().callsArgWith(1, null, bitcore.Block.fromBuffer(blocks['000000000008fbb2e358e382a6f6948b2da24563bba183af447e6e2542e8efc7'], 'hex'));
+      stub.onSecondCall().callsArgWith(1, null, bitcore.Block.fromBuffer(blocks['00000000000006bd8fe9e53780323c0e85719eca771022e1eb6d10c62195c441'], 'hex'))
+      var req = {};
+
+      var node = {
+        log: sinon.stub(),
+        getBlock: stub,
+        services: {
+          bitcoind: {
+            getBlockHeader: sinon.stub().callsArgWith(1, null, blockIndexes['000000000000000004a118407a4e3556ae2d5e882017e7ce526659d8073f13a4']),
+            isMainChain: sinon.stub().returns(true),
+            height: 534092
+          }
+        }
+      };
+
+      var controller = new BlockController({node: node});
+
+      var req = {
+        blockHashes: [
+          '000000000008fbb2e358e382a6f6948b2da24563bba183af447e6e2542e8efc7',
+          '00000000000006bd8fe9e53780323c0e85719eca771022e1eb6d10c62195c441'
+          ]
+      };
+      var res = {};
+      var res = {
+        jsonp: function(blocks) {
+          should.exist(blocks);
+          blocks.should.be.instanceof(Array).and.have.lengthOf(2);
+          should.exist(blocks[0].hash);
+          blocks[0].hash.should.be.equal('000000000008fbb2e358e382a6f6948b2da24563bba183af447e6e2542e8efc7');
+          should.exist(blocks[1].hash);
+          blocks[1].hash.should.be.equal('00000000000006bd8fe9e53780323c0e85719eca771022e1eb6d10c62195c441');
+          done();
+        }
+      };
       controller.block(req, res);
     });
 
