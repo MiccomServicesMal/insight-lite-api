@@ -8,14 +8,16 @@ var CurrencyController = require('../lib/currency');
 describe('Currency', function() {
 
   var bitstampData = {
-    high: 239.44,
-    last: 237.90,
-    timestamp: 1443798711,
-    bid: 237.61,
-    vwap: 237.88,
-    volume: 21463.27736401,
-    low: 235.00,
-    ask: 237.90
+    ticker: {
+      high: 239.44,
+      last: 237.90,
+      timestamp: 1443798711,
+      bid: 237.61,
+      vwap: 237.88,
+      volume: 21463.27736401,
+      low: 235.00,
+      ask: 237.90
+    }
   };
 
   it.skip('will make live request to bitstamp', function(done) {
