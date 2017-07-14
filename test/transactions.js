@@ -50,7 +50,8 @@ describe('Transactions', function() {
         ],
         'vout': [
           {
-            'value': '0.21247964',
+            'value': 0.21247964,
+            'valueSat': 21247964,
             'n': 0,
             'scriptPubKey': {
               'asm': 'OP_DUP OP_HASH160 4b7b335f978f130269fe661423258ae9642df8a1 OP_EQUALVERIFY OP_CHECKSIG',
@@ -66,7 +67,8 @@ describe('Transactions', function() {
             'spentHeight': null
           },
           {
-            'value': '0.13677426',
+            'value': 0.13677426,
+            'valueSat': 13677426,
             'n': 1,
             'scriptPubKey': {
               'asm': 'OP_DUP OP_HASH160 6efcf883b4b6f9997be9a0600f6c095fe2bd2d92 OP_EQUALVERIFY OP_CHECKSIG',
@@ -190,7 +192,8 @@ describe('Transactions', function() {
       var req = {
         params: {
           txid: txid
-        }
+        },
+        query: {}
       };
       var res = {};
       var next = function() {
@@ -384,7 +387,8 @@ describe('Transactions', function() {
             ],
             'vout': [
               {
-                'value': '12.50040000',
+                'value': 12.5004,
+                'valueSat': 1250040000,
                 'n': 0,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 68bedce8982d25c3b6b03f6238cbad00378b8ead OP_EQUALVERIFY OP_CHECKSIG',
@@ -446,7 +450,8 @@ describe('Transactions', function() {
             ],
             'vout': [
               {
-                'value': '0.21247964',
+                'value': 0.21247964,
+                'valueSat': 21247964,
                 'n': 0,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 4b7b335f978f130269fe661423258ae9642df8a1 OP_EQUALVERIFY OP_CHECKSIG',
@@ -462,7 +467,8 @@ describe('Transactions', function() {
                 'spentHeight': null
               },
               {
-                'value': '0.13677426',
+                'value': 0.13677426,
+                'valueSat': 13677426,
                 'n': 1,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 6efcf883b4b6f9997be9a0600f6c095fe2bd2d92 OP_EQUALVERIFY OP_CHECKSIG',
@@ -526,7 +532,8 @@ describe('Transactions', function() {
             ],
             'vout': [
               {
-                'value': '0.01940000',
+                'value': 0.0194,
+                'valueSat': 1940000,
                 'n': 0,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 8e451eec7ca0a1764b4ab119274efdd2727b3c85 OP_EQUALVERIFY OP_CHECKSIG',
@@ -543,7 +550,8 @@ describe('Transactions', function() {
                 'spentTs': 1440992946
               },
               {
-                'value': '0.01000000',
+                'value': 0.01,
+                'valueSat': 1000000,
                 'n': 1,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 d0fce8f064cd1059a6a11501dd66fe42368572b0 OP_EQUALVERIFY OP_CHECKSIG',
@@ -777,7 +785,8 @@ describe('Transactions', function() {
             ],
             'vout': [
               {
-                'value': '27.82729129',
+                'value': 27.82729129,
+                'valueSat': 2782729129,
                 'n': 0,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 3583efb5e64a4668c6c54bb5fcc30af4417b4f2d OP_EQUALVERIFY OP_CHECKSIG',
@@ -794,7 +803,8 @@ describe('Transactions', function() {
                 'spentTs': 1441072817
               },
               {
-                'value': '0.14000000',
+                'value': 0.14,
+                'valueSat': 14000000,
                 'n': 1,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 9713201957f42379e574d7c70d506ee49c2c8ad6 OP_EQUALVERIFY OP_CHECKSIG',
@@ -843,7 +853,8 @@ describe('Transactions', function() {
             ],
             'vout': [
               {
-                'value': '27.64693692',
+                'value': 27.64693692,
+                'valueSat': 2764693692,
                 'n': 0,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 56e446bc3489543d8324c6d0271524c0bd0506dd OP_EQUALVERIFY OP_CHECKSIG',
@@ -860,7 +871,8 @@ describe('Transactions', function() {
                 'spentTs': 1441077236
               },
               {
-                'value': '0.18000000',
+                'value': 0.18,
+                'valueSat': 18000000,
                 'n': 1,
                 'scriptPubKey': {
                   'asm': 'OP_DUP OP_HASH160 011d2963b619186a318f768dddfd98cd553912a0 OP_EQUALVERIFY OP_CHECKSIG',
